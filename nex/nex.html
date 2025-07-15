@@ -13,55 +13,148 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
+      flex-direction: column;
     }
 
-    .login-box {
+    .box {
       background: #ffffff;
-      padding: 40px;
+      padding: 30px;
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      width: 300px;
+      width: 350px;
       text-align: center;
+      margin-bottom: 20px;
     }
 
     h2 {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       color: #00796b;
     }
 
     input[type="text"],
-    input[type="password"] {
+    input[type="password"],
+    input[type="submit"] {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
-      border: 1px solid #ccc;
       border-radius: 5px;
+      border: 1px solid #ccc;
     }
 
     input[type="submit"] {
       background: #00796b;
       color: white;
       border: none;
-      padding: 10px;
-      width: 100%;
-      border-radius: 5px;
       cursor: pointer;
-      font-size: 16px;
     }
 
     input[type="submit"]:hover {
       background: #004d40;
     }
+
+    #hospitalList {
+      text-align: left;
+      color: #333;
+      margin-top: 10px;
+    }
+
+    .hospital {
+      background-color: #f1f1f1;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
-  <div class="login-box">
+
+  <!-- Login Section -->
+  <div id="loginBox" class="box">
     <h2>Health Tech Login</h2>
-    <form action="your-login-handler.php" method="POST">
-      <input type="text" name="username" placeholder="Username" required>
-      <input type="password" name="password" placeholder="Password" required>
+    <form onsubmit="return loginUser()">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
       <input type="submit" value="Login">
     </form>
   </div>
+
+  <!-- Search & Results Section -->
+  <div id="searchBox" class="box" style="display: none;">
+    <h2>Hospital Search</h2>
+    <form onsubmit="return searchHospitals()">
+      <input type="text" id="searchInput" placeholder="Search by name or city">
+      <input type="submit" value="Search">
+    </form>
+    <div id="hospitalList"></div>
+  </div>
+
+  <script>
+    const hospitalDB = [
+      {
+        name: "Apollo Hospital",
+        city: "Chennai",
+        contact: "044-2829-3333",
+        specialties: "Cardiology, Neurology, Oncology"
+      },
+      {
+        name: "Fortis Hospital",
+        city: "Bangalore",
+        contact: "080-6621-4444",
+        specialties: "Orthopedics, ENT, Pediatrics"
+      },
+      {
+        name: "AIIMS",
+        city: "New Delhi",
+        contact: "011-2658-8700",
+        specialties: "General Surgery, Pulmonology, Oncology"
+      },
+      {
+        name: "CMC Hospital",
+        city: "Vellore",
+        contact: "0416-228-1000",
+        specialties: "Diabetology, Nephrology, Urology"
+      },
+      {
+        name: "Global Hospital",
+        city: "Hyderabad",
+        contact: "040-2323-4567",
+        specialties: "Cardiology, Transplants, Neurosurgery"
+      }
+    ];
+
+    function loginUser() {
+      document.getElementById("loginBox").style.display = "none";
+      document.getElementById("searchBox").style.display = "block";
+      displayHospitals(hospitalDB); // show all hospitals after login
+      return false;
+    }
+
+    function searchHospitals() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const filtered = hospitalDB.filter(h => 
+        h.name.toLowerCase().includes(query) ||
+        h.city.toLowerCase().includes(query)
+      );
+      displayHospitals(filtered);
+      return false;
+    }
+
+    function displayHospitals(list) {
+      const container = document.getElementById("hospitalList");
+      if (list.length === 0) {
+        container.innerHTML = "<p>No hospitals found.</p>";
+        return;
+      }
+      container.innerHTML = list.map(h => `
+        <div class="hospital">
+          <strong>${h.name}</strong><br>
+          City: ${h.city}<br>
+          Contact: ${h.contact}<br>
+          Specialties: ${h.specialties}
+        </div>
+      `).join("");
+    }
+  </script>
+
 </body>
 </html>
