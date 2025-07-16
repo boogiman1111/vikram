@@ -1,0 +1,72 @@
+// package.json
+{
+  "name": "astro-api-starter",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^3.0.0",
+    "@astrojs/vercel": "^3.0.0"
+  }
+}
+
+// astro.config.ts
+import { defineConfig } from 'astro/config';
+import vercel from '@astrojs/vercel/serverless';
+
+export default defineConfig({
+  output: 'server',
+  adapter: vercel(),
+});
+
+// vercel.json
+{
+  "functions": {
+    "api/**/*.ts": {
+      "memory": 128,
+      "maxDuration": 10
+    }
+  }
+}
+
+// src/pages/index.astro
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Astro API Starter</title>
+</head>
+<body>
+  <h1>Welcome to Astro API Starter</h1>
+  <p>Visit <a href="/about">About</a> or test API: <a href="/api/ping">/api/ping</a></p>
+</body>
+</html>
+
+// src/pages/about.astro
+---
+---
+<html lang="en">
+<head><title>About</title></head>
+<body>
+  <h1>About This Site</h1>
+  <p>Simple Astro site with Vercel API integration.</p>
+  <p><a href="/">Back Home</a></p>
+</body>
+</html>
+
+// src/pages/api/ping.ts
+import type { APIRoute } from 'astro';
+
+export const get: APIRoute = () => {
+  return new Response(
+    JSON.stringify({ ping: 'pong', time: new Date().toISOString() }),
+    {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+};
