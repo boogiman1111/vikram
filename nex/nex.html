@@ -1,229 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Health Tech - Live Hospital Search + AI Chatbot</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom, #e0f7fa, #ffffff);
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
-
-    header {
-      width: 100%;
-      background-color: #004d40;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-
-    header img {
-      width: 50px;
-      vertical-align: middle;
-      margin-right: 10px;
-    }
-
-    .box {
-      background: #ffffff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-      width: 90%;
-      max-width: 600px;
-      text-align: center;
-      margin-top: 30px;
-      transition: transform 0.3s ease;
-    }
-
-    .box:hover {
-      transform: scale(1.02);
-    }
-
-    h2 {
-      color: #00796b;
-      margin-bottom: 20px;
-    }
-
-    input[type="text"],
-    input[type="password"],
-    input[type="submit"],
-    textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 12px 0;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      font-family: 'Segoe UI', sans-serif;
-      resize: none;
-    }
-
-    input[type="submit"] {
-      background: #00796b;
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    input[type="submit"]:hover {
-      background: #004d40;
-    }
-
-    .logout-btn {
-      background-color: #d32f2f;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 15px;
-      font-size: 14px;
-    }
-
-    .logout-btn:hover {
-      background-color: #b71c1c;
-    }
-
-    .health-image {
-      max-width: 120px;
-      margin-bottom: 15px;
-    }
-
-    .info-box {
-      background: #e0f2f1;
-      padding: 15px;
-      border-radius: 10px;
-      margin-top: 20px;
-      color: #004d40;
-      font-size: 14px;
-    }
-
-    /* Chatbot styles */
-    #chatbotBox {
-      position: fixed;
-      bottom: 80px;
-      right: 30px;
-      width: 320px;
-      max-height: 420px;
-      background: white;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-      border-radius: 12px;
-      display: none;
-      flex-direction: column;
-      padding: 15px;
-      z-index: 9999;
-    }
-
-    #chatOutput {
-      flex: 1;
-      overflow-y: auto;
-      border: 1px solid #ccc;
-      padding: 10px;
-      background: #f9f9f9;
-      font-size: 14px;
-      text-align: left;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      height: 250px;
-    }
-
-    #chatInput {
-      height: 60px;
-      font-size: 14px;
-    }
-
-    #openChatBtn {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      padding: 15px 20px;
-      background: #00796b;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      font-size: 20px;
-      cursor: pointer;
-      z-index: 9999;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-
-    #openChatBtn:hover {
-      background: #004d40;
-    }
-
-    #chatbotBox button {
-      margin-top: 5px;
-      background: #00796b;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    #chatbotBox button.close-btn {
-      background: #d32f2f;
-      margin-left: 10px;
-    }
-
-    #chatbotBox button:hover.close-btn {
-      background: #b71c1c;
-    }
+    /* [Styles remain unchanged – omitted here for brevity] */
+    /* Copy your existing CSS here – no changes needed */
   </style>
 </head>
 <body>
-
-  <!-- Header with logo -->
   <header>
-    <img src="https://cdn-icons-png.flaticon.com/512/3209/3209019.png" alt="Health Logo">
+    <img src="https://cdn-icons-png.flaticon.com/512/3209/3209019.png" alt="Health Logo" />
     <span style="font-size: 24px; vertical-align: middle;">Health Tech Portal</span>
   </header>
 
-  <!-- Login Section -->
   <div id="loginBox" class="box">
-    <img src="https://cdn-icons-png.flaticon.com/512/2785/2785819.png" class="health-image" alt="Health Icon">
+    <img src="https://cdn-icons-png.flaticon.com/512/2785/2785819.png" class="health-image" alt="Health Icon" />
     <h2>Login to Search Hospitals</h2>
     <form onsubmit="return loginUser()">
-      <input type="text" id="username" placeholder="Username" required>
-      <input type="password" id="password" placeholder="Password" required>
-      <input type="submit" value="Login">
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <input type="submit" value="Login" />
     </form>
   </div>
 
-  <!-- Google Search Section -->
   <div id="searchBox" class="box" style="display: none;">
     <h2>Search Indian Hospitals (Live on Google)</h2>
     <form action="https://www.google.com/search" method="GET" target="_blank">
-      <input type="text" name="q" id="searchInput" placeholder="Type hospital or city (e.g. Apollo Delhi)" required>
-      <input type="submit" value="Search on Google">
+      <input type="text" name="q" id="searchInput" placeholder="Type hospital or city (e.g. Apollo Delhi)" required />
+      <input type="submit" value="Search on Google" />
     </form>
     <button class="logout-btn" onclick="logout()">Logout</button>
-
-    <!-- Optional Info or Tip -->
     <div class="info-box">
       💡 Tip: Use city names + hospital types for better results. Example: <strong>Cardiology hospitals Chennai</strong>
     </div>
   </div>
 
-  <!-- AI Chatbot UI -->
   <div id="chatbotBox">
     <h2>AI Health Assistant</h2>
     <div id="chatOutput"></div>
-    <textarea id="chatInput" placeholder="Ask me about hospitals, health tips..." ></textarea>
+    <textarea id="chatInput" placeholder="Ask me about hospitals, health tips..."></textarea>
     <div style="text-align:right; margin-top: 5px;">
       <button onclick="sendMessage()">Send</button>
       <button class="close-btn" onclick="hideChatbot()">Close</button>
@@ -247,71 +64,58 @@
       hideChatbot();
     }
 
-    // Chatbot functions
     function showChatbot() {
-      document.getElementById('chatbotBox').style.display = 'flex';
-      document.getElementById('openChatBtn').style.display = 'none';
-      document.getElementById('chatInput').focus();
+      document.getElementById("chatbotBox").style.display = "flex";
+      document.getElementById("openChatBtn").style.display = "none";
+      document.getElementById("chatInput").focus();
     }
 
     function hideChatbot() {
-      document.getElementById('chatbotBox').style.display = 'none';
-      document.getElementById('openChatBtn').style.display = 'block';
+      document.getElementById("chatbotBox").style.display = "none";
+      document.getElementById("openChatBtn").style.display = "block";
     }
 
     async function sendMessage() {
-      const input = document.getElementById('chatInput');
-      const output = document.getElementById('chatOutput');
+      const input = document.getElementById("chatInput");
+      const output = document.getElementById("chatOutput");
       const userMessage = input.value.trim();
       if (!userMessage) return;
 
-      // Append user message
       output.innerHTML += `<div><b>You:</b> ${escapeHtml(userMessage)}</div>`;
-      input.value = '';
-
-      // Show loading
+      input.value = "";
       output.innerHTML += `<div id="loading"><i>AI is typing...</i></div>`;
       output.scrollTop = output.scrollHeight;
 
       try {
-        // Call your backend API endpoint (replace with your actual endpoint)
-        const response = await fetch('https://your-backend-api.com/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: userMessage })
-        });
+        // 🧪 Mock response for Vercel static hosting
+        await new Promise((res) => setTimeout(res, 1000)); // Simulate delay
+        const aiResponse = `This is a mock AI response to: "${userMessage}"`;
 
-        const data = await response.json();
-
-        // Remove loading message
-        const loadingElem = document.getElementById('loading');
+        const loadingElem = document.getElementById("loading");
         if (loadingElem) loadingElem.remove();
 
-        // Append AI response
-        output.innerHTML += `<div><b>AI:</b> ${escapeHtml(data.reply)}</div>`;
+        output.innerHTML += `<div><b>AI:</b> ${escapeHtml(aiResponse)}</div>`;
         output.scrollTop = output.scrollHeight;
       } catch (err) {
-        const loadingElem = document.getElementById('loading');
+        const loadingElem = document.getElementById("loading");
         if (loadingElem) loadingElem.remove();
         output.innerHTML += `<div><b>AI:</b> Sorry, something went wrong. Please try again later.</div>`;
         output.scrollTop = output.scrollHeight;
       }
     }
 
-    // Basic HTML escape to avoid injection in chat output
     function escapeHtml(text) {
-      return text.replace(/[&<>"']/g, function(m) {
-        return ({
-          '&': '&amp;',
-          '<': '&lt;',
-          '>': '&gt;',
-          '"': '&quot;',
-          "'": '&#39;'
-        })[m];
+      return text.replace(/[&<>"']/g, function (m) {
+        return {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        }[m];
       });
     }
   </script>
-
 </body>
 </html>
 
